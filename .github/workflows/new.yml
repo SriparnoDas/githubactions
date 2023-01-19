@@ -36,7 +36,7 @@ jobs:
          ls -a
          echo
          echo is git installed?
-         git ---version
+         git --version
          echo what about build in tools?
          mvn --version
           
