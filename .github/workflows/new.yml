@@ -39,6 +39,11 @@ jobs:
          git --version
          echo what about build in tools?
          mvn --version
+         
+         
+         evn
+         
+         
           
           
           
