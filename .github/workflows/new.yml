@@ -40,23 +40,5 @@ jobs:
          echo what about build in tools?
          mvn --version
          
-         
-         evn
-         
-         
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+         echo 1. what environment variables are availables?
+         env
