@@ -4,41 +4,57 @@ name: Getting Strated
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-on-windows:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    
+      - name: Step 1 - checkout the main GitHub branch
+        uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Step 2 - log
+        run: ls
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-         echo what is in this directory?
-         ls -a
-         echo
-         echo is git installed?
-         git --version
-         echo what about build in tools?
-         mvn --version
+      - name: Step 3 - Set up JDK1.8
+        uses: actions/setup-java@v1
+         with
+           Java-version:1.8 
          
-         echo 1. what environment variables are availables?
-         env
+      - name: Step 4 - check
+        run: |
+         echo here is the windows ExecutionPolicy:
+         Get-ExecutionPolicy
+         
+      - name: Step 6 - list
+        run: env
+        
+ # This second job in this workflow is named biuls-on-ubuntu
+  build-on-ubuntu:
+     # This type of runner 
+      runs-on: ubuntu-latest
+      
+      # Steps
+      steps:
+      
+        - name: Step 1 - log 
+          run: ls
+        
+        - name: Step 2 - Checkout
+          uses: actions/checkout@v2
+        
+        - name: Setup JDK 1.8
+          uses: actions/setup-java@v1
+        
+        - name: Step 4 - jakarta
+          run: echo mvn -B package --file pom.xml
+        
+        - name: Step 5 - list
+          run: env    
